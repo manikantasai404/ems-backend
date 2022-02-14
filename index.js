@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 
+const departmentRoute = require("./routes/departments");
+
 dotenv.config();
 
 //mongodb connection
@@ -20,6 +22,9 @@ mongoose
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+
+//APIs
+app.use("/api/department", departmentRoute);
 
 app.listen(8000, () => {
   console.log("Backend is running");
