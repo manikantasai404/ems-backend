@@ -21,5 +21,25 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Update user
+
+router.put("/:id", async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate(
+      { userId: req.params.id },
+      req.body
+    );
+    const { _id, __v, updatedAt, createdAt, ...other } = user._doc;
+    res.status(200).json({
+      Success: "User updated successfuly",
+      Data: other,
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: "Error occured",
+      Data: err,
+    });
+  }
+});
 
 module.exports = router;
