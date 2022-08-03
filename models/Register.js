@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
 
-const UserSchema = new mongoose.Schema(
+const RegisterSchema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -21,32 +21,22 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 6,
     },
-    holidaysList: {
-      type: Number,
-      default: 0,
-    },
-    isEmployee: {
+    isAdmin: {
       type: Boolean,
-      default: true,
     },
-    isManager: {
+    isHR: {
       type: Boolean,
-      default: false,
-    },
-    isTL: {
-      type: Boolean,
-      default: false,
     },
   },
   { timestamps: true }
 );
 
 autoIncrement.initialize(mongoose.connection);
-UserSchema.plugin(autoIncrement.plugin, {
-  model: "person",
-  field: "personId",
-  startAt: 600000,
+RegisterSchema.plugin(autoIncrement.plugin, {
+  model: "register",
+  field: "registerId",
+  startAt: 9000000,
   incrementBy: 1,
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Register", RegisterSchema);

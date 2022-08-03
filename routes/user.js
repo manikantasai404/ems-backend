@@ -27,7 +27,8 @@ router.put("/:id", async (req, res) => {
   try {
     const user = await User.findOneAndUpdate(
       { userId: req.params.id },
-      req.body
+      req.body,
+      { new: true }
     );
     const { _id, __v, updatedAt, createdAt, ...other } = user._doc;
     res.status(200).json({

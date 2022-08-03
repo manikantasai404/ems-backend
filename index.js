@@ -7,6 +7,8 @@ const morgan = require("morgan");
 
 const departmentRoute = require("./routes/departments");
 const userRoute = require("./routes/user");
+const registerRoute = require("./routes/register");
+const roleRoute = require("./routes/role");
 
 dotenv.config();
 
@@ -25,8 +27,11 @@ app.use(helmet());
 app.use(morgan("common"));
 
 //APIs
+app.use("/api/auth", registerRoute);
 app.use("/api/department", departmentRoute);
 app.use("/api/user", userRoute);
+app.use("/api/role", roleRoute);
+
 
 app.listen(8000, () => {
   console.log("Backend is running");
