@@ -57,10 +57,10 @@ router.post("/login", async (req, res) => {
       });
     }
     else {
-      const { _id, __v, updatedAt, createdAt, password, ...other } = user._doc;
+      const { _id, __v, updatedAt, createdAt, password,personId, ...other } = user._doc;
       res.status(200).json({
         Success: "Login Successfull ",
-        Data: other,
+        Data: personId,
       });
     }
   } catch (err) {
