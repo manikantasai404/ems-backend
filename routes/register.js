@@ -1,13 +1,13 @@
 const router = require("express").Router();
 const Register = require("../models/Register");
 const bcrypt = require("bcrypt");
+const genericmethod = require("../genericmodels");
 
 //REGISTER
 router.post("/register", async (req, res) => {
   try {
     //Generate new password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await genericmethod.getHashedPassword(req.body.password);
 
     //Create new user
     const newUser = new Register({
