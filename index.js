@@ -9,6 +9,11 @@ const departmentRoute = require("./routes/departments");
 const userRoute = require("./routes/user");
 const registerRoute = require("./routes/register");
 const roleRoute = require("./routes/role");
+const hotelCustomerRoute = require("./routes/hotelCustomers");
+const itemRoute = require("./routes/item");
+const tableRoute = require("./routes/tables");
+const orderRoute = require("./routes/order");
+const currentOrdersRoute = require("./routes/CurrentOrders");
 
 dotenv.config();
 
@@ -18,7 +23,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Database connected!"))
+  .then(() => console.log("Database connected successfully"))
   .catch((err) => console.log(err));
 
 //middlewares
@@ -31,8 +36,13 @@ app.use("/api/auth", registerRoute);
 app.use("/api/department", departmentRoute);
 app.use("/api/user", userRoute);
 app.use("/api/role", roleRoute);
+app.use("/api/customer", hotelCustomerRoute);
+app.use("/api/order", orderRoute);
+app.use("/api/item", itemRoute);
+app.use("/api/table", tableRoute);
+app.use("/api/orders", currentOrdersRoute);
 
 
 app.listen(6553, () => {
-  console.log("Backend is running");
+  console.log("Backend running successfully");
 });
