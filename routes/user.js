@@ -43,4 +43,32 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//LOGIN
+router.post("/login", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      res.status(200).json({
+        error: "User not found",
+      });
+    } else if (user.password != req.body.password) {
+      res.status(200).json({
+        error: "Please enter a valid password",
+      });
+    }
+    else {
+      const { _id, __v, updatedAt, createdAt, password,personId, ...other } = user._doc;
+      res.status(200).json({
+        Success: "Login Successfull ",
+        Data: personId,
+      });
+    }
+  } catch (err) {
+    res.status(404).json({
+      error: "Error occured",
+      Data: err,
+    });
+  }
+});
+
 module.exports = router;

@@ -43,6 +43,13 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
+  next(); // Important
+})
+
 //APIs
 app.use("/api/auth", registerRoute);
 app.use("/api/department", departmentRoute);
