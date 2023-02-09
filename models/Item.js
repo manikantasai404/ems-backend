@@ -13,9 +13,18 @@ const ItemScheme = new mongoose.Schema(
       type: String,
       unique: true,
     },
+    price: {
+      type: Number,
+      default: 50,
+    },
+    type: {
+      type: String,
+      enum: ["veg", "non-veg"],
+      default: "non-veg",
+    },
     isAvailable: {
-        type: Boolean,
-        default: true,
+      type: Boolean,
+      default: true,
     },
     rating: {
       type: Array,

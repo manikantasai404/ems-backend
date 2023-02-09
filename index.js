@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("express-cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
@@ -16,6 +17,17 @@ const orderRoute = require("./routes/order");
 const currentOrdersRoute = require("./routes/CurrentOrders");
 
 dotenv.config();
+
+//Cors policy to make public apis
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
+
+app.use(cors({
+  origin: ['http://localhost:6553']
+}));
 
 //mongodb connection
 mongoose
@@ -41,7 +53,6 @@ app.use("/api/order", orderRoute);
 app.use("/api/item", itemRoute);
 app.use("/api/table", tableRoute);
 app.use("/api/orders", currentOrdersRoute);
-
 
 app.listen(6553, () => {
   console.log("Backend running successfully");
