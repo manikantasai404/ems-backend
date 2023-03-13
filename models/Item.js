@@ -19,7 +19,7 @@ const ItemScheme = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["veg", "non-veg"],
+      enum: ["veg", "non-veg","mocktails","ice-cream"],
       default: "non-veg",
     },
     isAvailable: {

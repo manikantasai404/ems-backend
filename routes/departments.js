@@ -5,7 +5,6 @@ const router = require("express").Router();
 
 router.post("/", async (req, res) => {
   const newDepartment = new Department(req.body);
-  console.log(newDepartment);
   try {
     const savedDepartment = await newDepartment.save();
     const { _id, __v, updatedAt, createdAt, ...other } = savedDepartment._doc;

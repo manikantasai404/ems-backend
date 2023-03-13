@@ -4,7 +4,6 @@ let genericMethod = require("../genericmodels");
 
 router.get("/", async (req, res) => {
   const allCurrentOrders = await genericMethod.getAllRecords(CurrentOrders);
-  console.log(allCurrentOrders)
   if (allCurrentOrders.length > 0) {
     let data = [];
     allCurrentOrders.forEach((obj) => {
