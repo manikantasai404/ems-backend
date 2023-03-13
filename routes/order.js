@@ -6,6 +6,22 @@ let CurrentOrder = require("../models/currentOrders");
 
 router.put("/", async (req, res) => {
   //Updating customers current orders array
+  const date = await genericMethod.getDateTimeDetails("date");
+  const month = await genericMethod.getDateTimeDetails("month");
+  const year = await genericMethod.getDateTimeDetails("year");
+  const time = await genericMethod.getDateTimeDetails("time");
+  const hour = await genericMethod.getDateTimeDetails("hour");
+  const weekday = await genericMethod.getDateTimeDetails("weekday");
+
+  req.body.currentOrders.map((x) => {
+    x["mobileNumber"] = req.body.mobileNumber;
+    x["date"] = date;
+    x["time"] = time;
+    x["hour"] = hour;
+    x["year"] = year;
+    x["month"] = month;
+    x["weekday"] = weekday;
+  });
   let updateUesrOrders = await genericMethod.modifyRecord(
     req,
     HotelCustomer,
@@ -36,6 +52,14 @@ router.put("/", async (req, res) => {
         let object = {
           itemId: item.itemId,
           itemName: item.itemName,
+          type: item.type,
+          mobileNumber: item.mobileNumber,
+          date: item.date,
+          time: item.time,
+          hour: item.hour,
+          month: item.month,
+          year: item.year,
+          weekday: item.weekday,
         };
         arr.push(object);
       });
@@ -48,11 +72,6 @@ router.put("/", async (req, res) => {
       let sendNotification = await genericMethod.saveRecord(
         currentOrdersObj,
         CurrentOrder
-      );
-      console.log(
-        "currentOrdersObj",
-        currentOrdersObj.body.items,
-        sendNotification
       );
       if (sendNotification || sendNotification != null) {
         const { _id, __v, ...other } = updateTableOrders._doc;

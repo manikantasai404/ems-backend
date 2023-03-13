@@ -91,4 +91,21 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+router.get("/getCustomerDetails",async (req, res) => {
+  let customerDetails = await genericMethod.getSingleItemByParameter(
+    req,
+    HotelCustomer,
+    "mobileNumber"
+  );
+  if (customerDetails || customerDetails != null) {
+    const { _id, __v, updatedAt, createdAt, ...other } = customerDetails._doc;
+    res.status(200).json({
+      StatusCode: 200,
+      ExistingUSer: false,
+      Data: other,
+    });
+  }
+})
+
 module.exports = router;

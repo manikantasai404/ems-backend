@@ -5,7 +5,6 @@ const router = require("express").Router();
 
 router.post("/", async (req, res) => {
   const newUser = new User(req.body);
-  console.log(newUser);
   try {
     const savedUser = await newUser.save();
     const { _id, __v, updatedAt, createdAt, ...other } = savedUser._doc;
