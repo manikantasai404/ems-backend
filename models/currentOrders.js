@@ -20,6 +20,10 @@ const CurrentOrderSchema = new mongoose.Schema(
     items: {
       type: [itsmsSchema],
     },
+    mobileNumber: {
+      type: Number,
+      require: true,
+    },
   },
   { timestamps: true }
 );
