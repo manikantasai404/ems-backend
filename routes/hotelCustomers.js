@@ -12,6 +12,7 @@ router.post("/", async (req, res) => {
     Tabel,
     "tableNumber"
   );
+  console.log("tableStatus",tableStatus);
   if (tableStatus && !tableStatus.isOccupied) { // If not occupied
     // Checking weather the customer is new or old
     let customer = await genericMethod.getSingleItemByParameter(

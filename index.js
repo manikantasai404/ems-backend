@@ -15,6 +15,7 @@ const itemRoute = require("./routes/item");
 const tableRoute = require("./routes/tables");
 const orderRoute = require("./routes/order");
 const currentOrdersRoute = require("./routes/CurrentOrders");
+const previousOrdersRoute = require("./routes/PreviousOrders");
 
 dotenv.config();
 
@@ -60,6 +61,7 @@ app.use("/api/order", orderRoute);
 app.use("/api/item", itemRoute);
 app.use("/api/table", tableRoute);
 app.use("/api/orders", currentOrdersRoute);
+app.use("/api/previousorders", previousOrdersRoute);
 
 app.listen(6553, () => {
   console.log("Backend running successfully");

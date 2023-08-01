@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const itsmsSchema = new mongoose.Schema({
+const previousOrdersSchema = new mongoose.Schema({
   itemId: {
     type: Number,
     required: true,
@@ -52,17 +52,4 @@ const itsmsSchema = new mongoose.Schema({
   },
 });
 
-const CurrentOrderSchema = new mongoose.Schema(
-  {
-    tableNumber: {
-      type: Number,
-      require: true,
-    },
-    items: {
-      type: [itsmsSchema],
-    },
-  },
-  { timestamps: true }
-);
-
-module.exports = mongoose.model("CurrentOrder", CurrentOrderSchema);
+module.exports = mongoose.model("PreviousOrder", previousOrdersSchema);

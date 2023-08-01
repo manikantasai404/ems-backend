@@ -83,12 +83,29 @@ module.exports = {
 
   getSingleItemByParameter: async (req, model, searchparameter) => {
     try {
-      const record = await model.findOne({
-        [searchparameter]: req.body[searchparameter],
-      });
+      const record = await model.aggregate([
+        { $match: { [searchparameter]: req.body[searchparameter] } },
+        { $limit: 1 }
+      ]);
+      return record[0];
+    } catch (err) {
+      return err;
+    }
+  },
+
+  insertManyRecords: async (req, model) => {
+    const arr = req.body;
+    const instances = arr.map((obj) => new model(obj));
+    try {
+      const record = await model.insertMany(instances);
       return record;
     } catch (err) {
       return err;
     }
   },
+
+  // deleteManyRecords: async (req)
 };
+
+
+

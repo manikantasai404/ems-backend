@@ -5,6 +5,20 @@ let genericMethod = require("../genericmodels");
 let CurrentOrder = require("../models/currentOrders");
 
 router.put("/", async (req, res) => {
+  let currentTableOrders = await genericMethod.getSingleItemByParameter(
+    req,
+    Tabel,
+    "tableNumber"
+  );
+    console.log("currentTableOrders",currentTableOrders);
+    currentTableOrders.orders.forEach((x) => {
+          req.body.currentOrders.push(x)
+        })
+    // if(currentTableOrders && currentTableOrders.orders.length>0) {
+    //   currentTableOrders.orders.forEach((x) => {
+    //     req.body.currentOrders.push(x)
+    //   })
+    // }
   //Updating customers current orders array
   const date = await genericMethod.getDateTimeDetails("date");
   const month = await genericMethod.getDateTimeDetails("month");
@@ -21,6 +35,7 @@ router.put("/", async (req, res) => {
     x["year"] = year;
     x["month"] = month;
     x["weekday"] = weekday;
+    x["tableNumber"] = req.body.tableNumber;
   });
   let updateUesrOrders = await genericMethod.modifyRecord(
     req,
@@ -60,6 +75,8 @@ router.put("/", async (req, res) => {
           month: item.month,
           year: item.year,
           weekday: item.weekday,
+          tableNumber: item.tableNumber,
+          itemPrice: item.itemPrice,
         };
         arr.push(object);
       });
@@ -96,5 +113,18 @@ router.put("/", async (req, res) => {
     });
   }
 });
+
+// router.put("/curentOrderss", async (req, res) => {
+//   let currentTableOrders = await genericMethod.getSingleItemByParameter(
+//     req,
+//     CurrentOrder,
+//     "tableNumber"
+//   );
+//   res.status(200).json({
+//     Success: "Success",
+//     StatusCode: 200,
+//     Data: currentTableOrders,
+//   });
+// });
 
 module.exports = router;

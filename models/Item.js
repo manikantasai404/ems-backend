@@ -15,12 +15,12 @@ const ItemScheme = new mongoose.Schema(
     },
     price: {
       type: Number,
-      default: 50,
+      // default: 50,
     },
     type: {
       type: String,
       enum: ["veg", "non-veg","mocktails","ice-cream"],
-      default: "non-veg",
+      // default: "non-veg",
     },
     isAvailable: {
       type: Boolean,
